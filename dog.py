@@ -30,7 +30,7 @@ language = [
 english = "abcdefghijklmnopqrstuvwxyz"
 
 
-def convert(string):
+def convert_dog(string):
 
     """Converts passed in string into dog language and returns it
 
@@ -44,7 +44,7 @@ def convert(string):
     letters = [letter for letter in string]
     final = ""
 
-    print(letters)
+    # print(letters)
 
     for i, letter in enumerate(letters):
         if letter != " ":
@@ -61,10 +61,53 @@ def convert(string):
             continue
 
     return final
+
+def convert_en(string):
+
+    """Converts text to english from Dog Language
+
+    Arguments:
+        string (str): Text you want to convert in dog language 
+
+    Returns:
+        str: Converted text from dog to english
+    """
+
+    split = string.split()
+
+    current_word = ""
+    final = ""
+
+    for woof in split:
+        if not woof.endswith("."):
+            current_word += f"{woof} "
+            # print(current_word)
+
+        elif woof.endswith(".."):
+            current_word += woof[:-2]
+            word = language.index(current_word)
+            # print(current_word)
+
+            final += f"{english[word]} "
+            current_word = ""
+
+        else:
+            current_word += f"{woof[:-1]}"
+            letter = language.index(current_word)
+            current_word = ""
+            # print(current_word)
+
+            final += english[letter]
+
+    return final
     
 
 if __name__ == "__main__":
     
     translate = input("Translate this to dog: ")
 
-    print(convert(translate))
+    sent = convert_dog(translate)
+
+    print(sent)
+
+    print(convert_en(sent))
